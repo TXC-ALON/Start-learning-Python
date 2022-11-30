@@ -599,3 +599,113 @@ Python字符串 ---  一个有序的字符集合
 
 【37章】会讲unicode字符串，本章只讲基本的字符串
 
+严格的说，Python的字符串被划分为不可变序列这一类别（从左到右的顺序，且不可在原位置修改）
+
+![image-20221130110927077](Learning_Python_5th_Edition_1.assets/image-20221130110927077.png)
+
+![image-20221130111008808](Learning_Python_5th_Edition_1.assets/image-20221130111008808.png)
+
+
+
+#### 字符串字面量
+
+![image-20221130111147336](Learning_Python_5th_Edition_1.assets/image-20221130111147336.png)
+
+单引号和双引号是一样的，建议使用单引号。
+
+字符串之间加`,` 会创建一个元组。除非字符串内嵌了单引号，否则字符串会以单引号打印这些字符串。
+
+想用单引号内嵌单引号，得用转义符。
+
+```python
+E = 'anb'a'
+SyntaxError: unterminated string literal (detected at line 1)
+E = 'ans"a'
+E
+'ans"a'
+E = 'ad\'fa'
+E
+"ad'fa"
+```
+
+> 常用转义符
+>
+> ![image-20221130151443122](Learning_Python_5th_Edition_1.assets/image-20221130151443122.png)
+
+##### 原始字符串阻止转义
+
+用r或者双斜杠
+
+```python
+myfile = open(r'C:\new\text.dat','w')
+myfile = open('C:\\new\\text.dat','w')
+```
+
+注：尽管可以阻止转义，但是即使一个原始字符串也不能以一个单个反斜杠结尾，因为反斜杠会转义后面的引号。
+
+##### 三引号编写多行块字符串
+
+转折处内嵌`\n`
+
+![image-20221130152331035](Learning_Python_5th_Edition_1.assets/image-20221130152331035.png)
+
+可以使用三引号来注释打断代码。虽然会创建字符串，不过也没什么损耗。
+
+
+
+#### 实际应用中的字符串
+
+##### 基本操作
+
+- 使用`+`拼接字符串
+- 使用*重复它们
+
+##### 索引和分片
+
+![image-20221130153443577](Learning_Python_5th_Edition_1.assets/image-20221130153443577.png)
+
+
+
+![image-20221130153544192](Learning_Python_5th_Edition_1.assets/image-20221130153544192.png)
+
+k可以是负数，那么就实现反转。
+
+```python
+C
+'C:\\new\\text.dat'
+C[::-1]
+'tad.txet\\wen\\:C'
+```
+
+##### 字符串转换
+
+###### 字符串转换工具
+
+Python座右铭之一	--	拒绝猜测。
+
+所以字符串（哪怕是数字字符串）也不能与数字相加。
+
+可以使用`str()` 、`int()`这些转换函数实现互相转换。
+
+###### 字符串代码转换
+
+可以将单个字符转换为其底层的整数码（ASCII字节值）
+
+```python
+ord('s')
+115
+chr(115)
+'s'
+```
+
+##### 修改字符串①
+
+不能在原位置修改一个字符串，比如给索引赋值。
+
+要想改变一个字符串，通常需要利用拼接、分片这些工具。
+
+##### 字符串格式化表达式
+
+![image-20221130154831224](Learning_Python_5th_Edition_1.assets/image-20221130154831224.png)
+
+### 字符串方法
