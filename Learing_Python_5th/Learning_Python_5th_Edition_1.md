@@ -708,4 +708,194 @@ chr(115)
 
 ![image-20221130154831224](Learning_Python_5th_Edition_1.assets/image-20221130154831224.png)
 
-### 字符串方法
+#### 字符串方法
+
+
+
+> # 方法调用语法
+>
+> ![image-20221130155824174](Learning_Python_5th_Edition_1.assets/image-20221130155824174.png)
+
+Python 3.3里的字符串方法
+
+![image-20221130155949577](Learning_Python_5th_Edition_1.assets/image-20221130155949577.png)
+
+##### 示例1 修改字符串②
+
+- `replace` 
+
+两个参数分别为最初子串和替换最初子串的字符串，后全局搜索进行替换
+
+```python
+'aa$bb$cc$dd'.replace('$','##')
+'aa##bb##cc##dd'
+```
+
+​	replace 返回一个新的字符串，因为字符串不可变，本质上是替换了原字符串。
+
+> ## list&join 方法
+>
+> 先转为列表打散后拼接
+>
+> ![image-20221201102200839](Learning_Python_5th_Edition_1.assets/image-20221201102200839.png)
+
+##### 示例2 解析文本
+
+文本解析 --  分析结构并提取子串
+
+- `split` 
+
+  将一个字符串从分隔符处切成一系列子串。默认为空格。
+
+- `rstrip()`
+
+  清除每行末尾的空白
+
+
+#### 字符串格式化表达式
+
+##### 格式字符串基础
+
+![image-20221201102956627](Learning_Python_5th_Edition_1.assets/image-20221201102956627.png)  
+
+  ![image-20221201103513798](Learning_Python_5th_Edition_1.assets/image-20221201103513798.png)
+
+  ![image-20221201103536693](Learning_Python_5th_Edition_1.assets/image-20221201103536693.png)
+
+  
+
+#####   基于字典的格式化表达式
+
+  ```python
+  '%(qty)d more %(food)s' % {'qty':1,'food':'spam'}
+  '1 more spam'
+  ------------------------------------------------------
+  reply = '''
+  Greetings...
+  Hello %(name)s !
+  Your age is %(age)s
+  '''
+  values = {'name' :'Bob', 'age' : 48}
+  print(reply %values)
+  Greetings...
+  Hello Bob !
+  Your age is 48
+  ```
+
+
+
+####   字符串格式化方法调用
+
+##### 字符串格式化方法基础
+
+ Python2.6 开始，新增了一种格式化字符串的函数 **str.format()**，它增强了字符串格式化的功能。
+
+基本语法是通过 **{}** 和 **:** 来代替以前的 **%** 。
+
+format 函数可以接受不限个参数，位置可以不按顺序。
+
+实例
+
+```python
+"{} {}".format("hello", "world")    # 不设置指定位置，按默认顺序 
+'hello world'
+
+"{0} {1}".format("hello", "world")  # 设置指定位置 
+'hello world'
+
+"{1} {0} {1}".format("hello", "world")  # 设置指定位置 
+'world hello world'
+```
+
+
+
+也可以设置参数：
+
+**实例**
+
+```python
+#!/usr/bin/python 
+# -*- coding: UTF-8 -*-  
+print("网站名：{name}, 地址 {url}".format(name="菜鸟教程", url="www.runoob.com"))  
+
+# 通过字典设置参数 
+site = {"name": "菜鸟教程", "url": "www.runoob.com"} 
+print("网站名：{name}, 地址 {url}".format(**site))  
+
+# 通过列表索引设置参数 
+my_list = ['菜鸟教程', 'www.runoob.com'] 
+print("网站名：{0[0]}, 地址 {0[1]}".format(my_list))  # "0" 是必须的
+```
+
+
+
+输出结果为：
+
+```
+网站名：菜鸟教程, 地址 www.runoob.com
+网站名：菜鸟教程, 地址 www.runoob.com
+网站名：菜鸟教程, 地址 www.runoob.com
+```
+
+也可以向 **str.format()** 传入对象：
+
+**实例**
+
+```python
+#!/usr/bin/python 
+# -*- coding: UTF-8 -*-  
+class AssignValue(object):    
+    def __init__(self, value):        
+        self.value = value my_value = AssignValue(6) 
+print('value 为: {0.value}'.format(my_value))  # "0" 是可选的
+```
+
+输出结果为：
+
+```
+value 为: 6
+```
+
+**数字格式化**
+
+下表展示了 str.format() 格式化数字的多种方法：
+
+```
+>>> print("{:.2f}".format(3.1415926))
+3.14
+```
+
+  
+
+#####  高级格式化方法语法
+
+可以通过在标识码后面加冒号指定字段大小、对齐方式和特定类型编码的格式化说明符
+
+四个部分都是可选的，中间不得有空格
+
+```python
+{fieldname component !conversionflag :formatspec}
+```
+
+- fieldname 是辨识参数的一个可选的数字或关键字，在目前版本可以将其省略以使用相对参数编号
+- component 是有着大于零个".name" 或"[index]"引用的字符串，它可以被省略以使用完整的参数值，其中的引用用来获取参数的属性或索引值。
+- conversionflag 如果出现则以！开始，后面跟着r、s或a，在这个值上分别调用repr、str、ascii内置函数。
+- formatspec如果出现则以：开始，后面跟着文本，指定了如果表示该值，包括字段宽度、对齐方式、补零、小数精度等细节，并且以一个可选的数据类型码结束。
+
+![image-20221201141423433](Learning_Python_5th_Edition_1.assets/image-20221201141423433.png)
+
+```python
+import sys
+'{.platform:>10} = {[kind]:<10}'.format(sys,dict(kind = 'laptop'))
+'     win32 = laptop    '
+
+
+'{0:b}'.format((2**16)-1)
+'1111111111111111'
+'{0:o}'.format((2**16)-1)
+'177777'
+
+'{:,d}'.format(9999999999999)
+'9,999,999,999,999'
+```
+
