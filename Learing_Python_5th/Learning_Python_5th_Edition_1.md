@@ -899,3 +899,190 @@ import sys
 '9,999,999,999,999'
 ```
 
+
+
+> ## [f-Strings](https://www.zhihu.com/search?q=f-Strings&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"article"%2C"sourceId"%3A"90439125"})：一种改进版格式化方式
+>
+> 
+>
+> Python 3.6 引入了新的字符串格式化方式，这种方式来自于 Eric V. Smith 在 2015 年 8 月提出的方案，具体可以参考[PEP 498](https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0498/)。
+>
+> f-strings 也称作“格式化的[字符串字面量](https://www.zhihu.com/search?q=字符串字面量&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"article"%2C"sourceId"%3A"90439125"})”，它是一个带有 `f` 前缀的字符串，通过大括号嵌入所需的 Python 表达式，这些表达式的具体值是在运行时确定的，背后依赖的也是嵌入对象的 `__format()__` 接口。查看 [官方文档](https://link.zhihu.com/?target=https%3A//docs.python.org/3/reference/lexical_analysis.html%23f-strings) 可以获得更多信息。
+>
+> 以下是一些具体使用方式：
+>
+> ### 最简单的句法
+>
+> f-strings 的句法类似于`str.format()`，但要更简洁，你可以感受一下它的可读性：
+>
+> ```text
+> >>> name = "Eric"
+> >>> age = 74
+> >>> f"Hello, {name}. You are {age}."
+> 'Hello, Eric. You are 74.'
+> ```
+>
+> 前缀`f`也可以使用大写的`F`。
+>
+> ```text
+> >>> F"Hello, {name}. You are {age}."
+> 'Hello, Eric. You are 74.'
+> ```
+>
+> 你是不是已经开始喜欢上这种格式化方式了？
+>
+> ### 支持任意表达式
+>
+> 由于 f-strings 是在运行时计算具体值的，我们得以在字符串中嵌入任意有效的 Python 表达式，从而写出更优雅的代码。
+>
+> 你可以使用很直接的计算式，比如说：
+>
+> ```text
+> >>> f"{2 * 37}"
+> '74'
+> ```
+>
+> 也可以在里面调用函数：
+>
+> ```text
+> >>> def to_lowercase(input):
+> ...     return input.lower() 
+> >>> name = "Eric Idle"
+> >>> f"{to_lowercase(name)} is funny."
+> 'eric idle is funny.'
+> ```
+>
+> 或者直接调用对象的方法：
+>
+> ```text
+> >>> f"{name.lower()} is funny."
+> 'eric idle is funny.'
+> ```
+>
+> 甚至可以在对象的字符串方法中直接使用 f-strings，例如有以下类：
+>
+> ```text
+> class Comedian:
+>     def __init__(self, first_name, last_name, age):
+>         self.first_name = first_name
+>         self.last_name = last_name
+>         self.age = age
+> 
+>      def __str__(self):
+>         return f"{self.first_name} {self.last_name} is {self.age}."
+> 
+>      def __repr__(self):
+>         return f"{self.first_name} {self.last_name} is {self.age}. Surprise!"
+> ```
+>
+> 你可以有如下代码：
+>
+> ```text
+> >>> new_comedian = Comedian("Eric", "Idle", "74")
+> >>> f"{new_comedian}"
+> 'Eric Idle is 74.'
+> ```
+>
+> `__str__()`方法与`__repr__()`方法用于处理对象的字符串显示方式，我们有必要至少定义其中一个。如果必须二选一的话，建议使用`__repr__()`，在`__str__()`方法没有定义的情况下，解释器会自动调用`__repr__()`方法。
+>
+> `__str__()`方法返回的是对象的非正式字符串表示，主要考虑可读性，而`__repr__()`方法返回的是对象的正式字符串表示，主要考虑精确性。调用这两个函数时，比较推荐的方式是直接使用内置函数`str()`和`repr()`。
+>
+> f-strings 会默认调用对象的`__str__()`方法，如果要强制使用`__repr__()`方法，则可以在变量之后加上转换标志`!r`：
+>
+> ```text
+> >>> f"{new_comedian}"'Eric Idle is 74.'
+> >>> f"{new_comedian!r}"
+> 'Eric Idle is 74. Surprise!'
+> ```
+>
+> 想要了解更多 f-strings 的转换问题，可以阅读 [相关资料](https://link.zhihu.com/?target=https%3A//mail.python.org/pipermail/python-ideas/2015-July/034726.html)。
+
+
+
+### 第八章 列表与字典
+
+#### 列表
+
+##### 列表的主要属性
+
+- 任意对象的有序集合
+- 通过偏移进行索引进行访问，可以进行分片、拼接的操作
+- 可变长度、异构以及任意嵌套
+- 属于可变序列的分类，可在原位置被修改。
+- 对象引用数组
+
+##### 常用列表字面量和操作
+
+![image-20221205170515634](Learning_Python_5th_Edition_1.assets/image-20221205170515634.png)
+
+![image-20221205170528103](Learning_Python_5th_Edition_1.assets/image-20221205170528103.png)
+
+
+
+###### 分片赋值
+
+```python
+L = ['Spam','123','ABS']
+L
+['Spam', '123', 'ABS']
+L[0:2] = ['Python','easy']
+L
+['Python', 'easy', 'ABS']
+```
+
+这里可以分两步来理解，
+
+- 删除：首先是删除等号左边指定的切片
+- 插入：将包含杂等号右边可迭代对象中的片段插入旧分片被删除的位置。
+
+这种方式可以用在头尾部拼接上
+
+```python
+L[:0] = [3,4,5]
+L
+[3, 4, 5, 'Python', 'easy', 'ABS']
+L[len(L):] = [55,6,77] # 类似于L.extend([55,6,77])
+L
+[3, 4, 5, 'Python', 'easy', 'ABS', 55, 6, 77]
+```
+
+
+
+###### append 和 extend 的区别
+
+- extend 总是循环访问传入的可迭代对象，并逐个把产生的元素添加到列表尾部。
+- append 会直接把这个传入的可迭代对象添加到尾部而不会遍历它
+
+第14章会详细分析里面的差异，
+
+> append()和extend()都可以在在原有列表上增加对象，但是使用起来有很大区别。
+>
+> append()用于在列表末尾添加新的对象，任意对象都是可以的，列表只占一个索引位，会修改原来的列表。
+>
+> extend()向列表尾部追加一个列表，对象必须是一个可以迭代的序列
+
+通过append 和 pop，可以实现类似栈的LIFO结构。列表的末端作为栈的顶端。
+
+#### 字典
+
+##### 字典的主要属性如下
+
+- 通过键而不是偏移量来读取
+
+  字典又被叫做关联数组或者散列表hash
+
+- 任意对象的无序集合
+
+- 长度可变、异构、任意嵌套
+
+- 属于可变映射类型
+
+- 对象引用表（散列表）
+
+
+
+##### 常见字典字面量和操作
+
+![image-20221205173526399](Learning_Python_5th_Edition_1.assets/image-20221205173526399.png)
+
+![image-20221205173536716](Learning_Python_5th_Edition_1.assets/image-20221205173536716.png)
