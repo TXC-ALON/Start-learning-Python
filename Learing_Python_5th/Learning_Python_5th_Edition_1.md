@@ -1086,3 +1086,47 @@ L
 ![image-20221205173526399](Learning_Python_5th_Edition_1.assets/image-20221205173526399.png)
 
 ![image-20221205173536716](Learning_Python_5th_Edition_1.assets/image-20221205173536716.png)
+
+如表8-2所示，字典通过键进行索引，嵌套的字典项是有一系列索引（方括号中的键）来访问的。
+
+##### 字典用法注意事项
+
+- 序列运算无效
+- 对新索引赋值会添加项
+- 键不一定总是字符串
+
+
+
+例子：对稀疏数据结构使用字典：用元组做键
+
+```python
+Matrix = {}
+Matrix[(2,3,4)] = 88
+Matrix[(5,4,2)] = 99
+Matrix
+#{(2, 3, 4): 88, (5, 4, 2): 99}
+```
+
+
+
+##### 避免键不存在错误
+
+读取不存在的键在稀疏矩阵来说很常见。
+
+这里有至少三种方法来填入默认值而不会出现这样的错误提示
+
+```python
+if(2,3,4) in Matrix:
+    print(Matrix[(2,3,4)])
+else:
+    print(0)
+    
+try:
+    print(Matrix[(2,3,4)])
+except KeyError:
+    print(0)
+    
+Matrix.get((2,3,4),0)
+```
+
+编码角度来说，get更简洁，但是if和try更普遍【第十章会讲】
