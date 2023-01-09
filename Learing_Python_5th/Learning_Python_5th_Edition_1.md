@@ -1178,9 +1178,9 @@ dict([('name','bob'),('age',40)])
 
 ##### 常见的元组字面量和运算
 
-![image-20230109221823526](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230109221823526.png)
+![image-20230109221823526](E:\00Learning\Python\Start-learning-Python\Learing_Python_5th\Learning_Python_5th_Edition_1.assets\image-20230109221823526.png)
 
-![image-20230109221835810](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230109221835810.png)
+![image-20230109221835810](E:\00Learning\Python\Start-learning-Python\Learing_Python_5th\assets\image-20230109221835810.png)
 
 
 
@@ -1202,9 +1202,9 @@ y = (50,)
 
 ##### 常见的文件操作
 
-![image-20230109223743454](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230109223743454.png)
+![image-20230109223743454](E:\00Learning\Python\Start-learning-Python\Learing_Python_5th\Learning_Python_5th_Edition_1.assets\image-20230109223743454.png)
 
-![image-20230109223753009](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230109223753009.png)
+![image-20230109223753009](E:\00Learning\Python\Start-learning-Python\Learing_Python_5th\Learning_Python_5th_Edition_1.assets\image-20230109223753009.png)
 
 
 
@@ -1264,7 +1264,7 @@ pickle模块可以让我们直接在文件中存储几乎任何Python对象的�
 
 ### 核心类型复习与总结
 
-![image-20230109231352209](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230109231352209.png)
+![image-20230109231352209](E:\00Learning\Python\Start-learning-Python\Learing_Python_5th\Learning_Python_5th_Edition_1.assets\image-20230109231352209.png)
 
 #### 对象灵活性
 
@@ -1277,11 +1277,11 @@ pickle模块可以让我们直接在文件中存储几乎任何Python对象的�
 - `==` 运算符测试值的等价性	     --Python会运行等价性测试，并递归地比较所有内嵌对象。
 - `is` 表达式测试对象的同一性     --Python测试在存储器中的相同地址
 
+![image-20230109231945667](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230109231945667.png)
 
+#### Python的类型层次
 
-
-
-
+![image-20230109232111261](E:\00Learning\Python\Start-learning-Python\Learing_Python_5th\Learning_Python_5th_Edition_1.assets\image-20230109232111261.png)
 
 
 
